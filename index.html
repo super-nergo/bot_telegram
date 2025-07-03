@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Mini App Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Угадай число (1-10)</h1>
+    <p id="message">Нажми "Старт", чтобы начать!</p>
+    <button onclick="startGame()">Старт</button>
+    <button onclick="guessNumber()">Угадать</button>
+    <input type="number" id="userGuess" min="1" max="10" placeholder="1-10">
+    
+    <script>
+        let targetNumber;
+        
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Развернуть приложение на весь экран
+        
+        function startGame() {
+            targetNumber = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('message').textContent = 'Я загадал число. Попробуй угадать!';
+        }
+        
+        function guessNumber() {
+            const userGuess = parseInt(document.getElementById('userGuess').value);
+            if (userGuess === targetNumber) {
+                document.getElementById('message').textContent = '🎉 Правильно! Это ' + targetNumber;
+            } else {
+                document.getElementById('message').textContent = '❌ Неверно. Попробуй ещё!';
+            }
+        }
+    </script>
+</body>
+</html>
